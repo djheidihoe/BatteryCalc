@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Power Consumption Calculator</title>
+  <style>
+    .slider {
+      width: 300px;
+      margin-bottom: 20px;
+    }
+
+    .appliance-button {
+      display: inline-block;
+      width: 120px;
+      height: 80px;
+      margin-right: 10px;
+      text-align: center;
+      vertical-align: middle;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Power Consumption Calculator</h1>
+  
+  <input type="range" min="50" max="6000" value="1000" step="50" class="slider" id="powerRange">
+  <p>Power Consumption: <span id="powerValue">1000</span> Watts</p>
+  <p>Estimated Battery Runtime: <span id="runtimeValue">1 hour</span></p>
+  
+  <div class="appliance-buttons">
+    <div class="appliance-button" onclick="setSliderValue(300)">
+      <img src="led_light_symbol.png" alt="LED Light">
+      <p>LED Light</p>
+    </div>
+    <div class="appliance-button" onclick="setSliderValue(2000)">
+      <img src="sound_system_symbol.png" alt="Sound System">
+      <p>Sound System</p>
+    </div>
+    <div class="appliance-button" onclick="setSliderValue(6000)">
+      <img src="powertool_symbol.png" alt="Power Tool">
+      <p>Power Tool</p>
+    </div>
+  </div>
+  
+  <script>
+    // Function to calculate the battery runtime
+    function calculateRuntime() {
+      // Get the power consumption value from the slider
+      var power = parseInt(document.getElementById("powerRange").value);
+      
+      // Calculate the battery runtime in hours
+      var runtime = 1000 / power;
+      
+      // Update the displayed values
+      document.getElementById("powerValue").textContent = power;
+      document.getElementById("runtimeValue").textContent = runtime.toFixed(1) + " hours";
+    }
+    
+    // Function to set the slider value and update the calculations
+    function setSliderValue(value) {
+      document.getElementById("powerRange").value = value;
+      calculateRuntime();
+    }
+    
+    // Event listener for the slider input
+    document.getElementById("powerRange").addEventListener("input", calculateRuntime);
+    
+    // Initial calculation on page load
+    calculateRuntime();
+  </script>
+</body>
+</html>
